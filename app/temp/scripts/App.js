@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11290,7 +11290,7 @@ var _noframework = __webpack_require__(1);
 
 var _noframework2 = _interopRequireDefault(_noframework);
 
-var _jquerySmoothScroll = __webpack_require__(6);
+var _jquerySmoothScroll = __webpack_require__(7);
 
 var _jquerySmoothScroll2 = _interopRequireDefault(_jquerySmoothScroll);
 
@@ -11373,8 +11373,43 @@ exports.default = StickyHeader;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var _MobileMenu = __webpack_require__(2);
+
+var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
+
+var _RevealOnScroll = __webpack_require__(4);
+
+var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _StickyHeader = __webpack_require__(5);
+
+var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
+
+var _Modal = __webpack_require__(3);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mobileMenu = new _MobileMenu2.default();
+new _RevealOnScroll2.default((0, _jquery2.default)('.work-item'), "85%");
+new _RevealOnScroll2.default((0, _jquery2.default)('.testimonials'), "60%");
+var stickyHeader = new _StickyHeader2.default();
+var modal = new _Modal2.default();
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery Smooth Scroll - v2.1.2 - 2017-01-19
+ * jQuery Smooth Scroll - v2.2.0 - 2017-05-05
  * https://github.com/kswedberg/jquery-smooth-scroll
  * Copyright (c) 2017 Karl Swedberg
  * Licensed MIT
@@ -11396,7 +11431,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 }(function($) {
 
-  var version = '2.1.2';
+  var version = '2.2.0';
   var optionOverrides = {};
   var defaults = {
     exclude: [],
@@ -11416,6 +11451,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     // only use if you want to override default behavior
     scrollTarget: null,
+
+    // automatically focus the target element after scrolling to it
+    autoFocus: false,
 
     // fn(opts) function to be called before scrolling occurs.
     // `this` is the element(s) being scrolled
@@ -11503,6 +11541,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   var rRelative = /^([\-\+]=)(\d+)/;
+
   $.fn.extend({
     scrollable: function(dir) {
       var scrl = getScrollable.call(this, {dir: dir});
@@ -11615,6 +11654,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     return explicit;
   };
 
+  var onAfterScroll = function(opts) {
+    var $tgt = $(opts.scrollTarget);
+
+    if (opts.autoFocus && $tgt.length) {
+      $tgt[0].focus();
+
+      if (!$tgt.is(document.activeElement)) {
+        $tgt.prop({tabIndex: -1});
+        $tgt[0].focus();
+      }
+    }
+
+    opts.afterScroll.call(opts.link, opts);
+  };
+
   $.smoothScroll = function(options, px) {
     if (options === 'options' && typeof px === 'object') {
       return $.extend(optionOverrides, px);
@@ -11685,7 +11739,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       duration: speed,
       easing: opts.easing,
       complete: function() {
-        opts.afterScroll.call(opts.link, opts);
+        onAfterScroll(opts);
       }
     };
 
@@ -11696,7 +11750,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if ($scroller.length) {
       $scroller.stop().animate(aniProps, aniOpts);
     } else {
-      opts.afterScroll.call(opts.link, opts);
+      onAfterScroll(opts);
     }
   };
 
@@ -11716,41 +11770,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _MobileMenu = __webpack_require__(2);
-
-var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
-
-var _RevealOnScroll = __webpack_require__(4);
-
-var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _StickyHeader = __webpack_require__(5);
-
-var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
-
-var _Modal = __webpack_require__(3);
-
-var _Modal2 = _interopRequireDefault(_Modal);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mobileMenu = new _MobileMenu2.default();
-new _RevealOnScroll2.default((0, _jquery2.default)('.work-item'), "85%");
-new _RevealOnScroll2.default((0, _jquery2.default)('.testimonials'), "60%");
-var stickyHeader = new _StickyHeader2.default();
-var modal = new _Modal2.default();
 
 /***/ })
 /******/ ]);
