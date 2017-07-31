@@ -11,7 +11,7 @@
 		padding-right: 65px;
 	}
 	
-	@mixin atMedium{
+	@mixin atSmall{
 		
 		&__medium-4{
 		
@@ -33,6 +33,11 @@
 	
 	}
 	
+	&__img{
+		width: 320px;
+		height: 320px;
+		margin-top: 50%;
+	}
 
 	
 }

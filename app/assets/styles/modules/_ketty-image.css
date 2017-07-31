@@ -1,0 +1,10 @@
+.ketty-img{
+	border-radius: 50%;
+	max-width: 100%;
+	height: auto;
+	margin: 40px 0 10px 0;
+	
+	@mixin atSmall{
+		margin: 0 0 10px 0;
+	}
+}
