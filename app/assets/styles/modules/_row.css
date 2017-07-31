@@ -31,6 +31,11 @@
 		width: 50%;
 	}
 	
+	&__meduim-12{
+		float: none;
+		width: auto;
+	}
+	
 	}
 	
 	&__img{

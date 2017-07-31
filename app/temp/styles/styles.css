@@ -623,6 +623,11 @@ body{
     float: left;
     width: 50%;
   }
+
+  .row__meduim-12 {
+    float: none;
+    width: auto;
+  }
 }
 
 .row__img{
