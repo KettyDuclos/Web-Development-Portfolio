@@ -1,8 +1,8 @@
 .ketty-img{
 	border-radius: 50%;
-	max-width: 100%;
+	max-width: 75%;
 	height: auto;
-	margin: 40px 0 10px 0;
+	margin: 40px 0 10px 40px;
 	
 	@mixin atSmall{
 		margin: 0 0 10px 0;
